@@ -1,6 +1,8 @@
 package com.shu.sell.dataobject;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -19,6 +21,8 @@ import java.util.Date;
 @Data
 @DynamicUpdate
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductCategory {
     @Id
     @GeneratedValue

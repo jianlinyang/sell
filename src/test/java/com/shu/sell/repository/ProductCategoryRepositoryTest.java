@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author yang
  * @date 2019/6/13 20:48
@@ -26,7 +29,7 @@ public class ProductCategoryRepositoryTest {
     @Test
     public void saveOneTest(){
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryType(3);
+        productCategory.setCategoryType(2);
         productCategory.setCategoryName("最受欢迎的");
         repository.save(productCategory);
     }
@@ -37,5 +40,14 @@ public class ProductCategoryRepositoryTest {
         productCategory.setCategoryType(3);
         productCategory.setCategoryName("热销的");
         repository.save(productCategory);
+    }
+
+    @Test
+    public void findByList(){
+        List<Integer> list=new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        List<ProductCategory> byCategoryTypeIn = repository.findByCategoryTypeIn(list);
+        System.out.println(byCategoryTypeIn.size());
     }
 }
