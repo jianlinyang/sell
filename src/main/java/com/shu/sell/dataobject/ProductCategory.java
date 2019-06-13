@@ -1,6 +1,8 @@
 package com.shu.sell.dataobject;
 
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,8 @@ import java.util.Date;
  */
 @Entity
 @Data
+@DynamicUpdate
+@ToString
 public class ProductCategory {
     @Id
     @GeneratedValue
