@@ -1,4 +1,4 @@
-package com.shu.sell.service.Impl;
+package com.shu.sell.service.impl;
 
 import com.shu.sell.dataobject.ProductInfo;
 import org.junit.Test;
@@ -8,10 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author yang

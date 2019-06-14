@@ -26,18 +26,18 @@ create table `product_category`
 
 create table `order_master`
 (
-    `order_id`      varchar(32)            not null,
-    `buyer_name`    varchar(32)            not null comment '买家名字',
-    `buyer_phone`   varchar(32)            not null comment '买家电话',
-    `buyer_address` varchar(128)           not null comment '买家地址',
-    `buyer_openid`  varchar(64)            not null comment '买家微信openId',
-    `buyer_amount`  decimal(8, 2)          not null comment '买家订单总金额',
-    `order_status`  tinyint(3) default '0' not null comment '订单状态,订单状态默认0新下单',
+    `order_id`      varchar(32)   not null,
+    `buyer_name`    varchar(32)   not null comment '买家名字',
+    `buyer_phone`   varchar(32)   not null comment '买家电话',
+    `buyer_address` varchar(128)  not null comment '买家地址',
+    `buyer_open_id` varchar(64)   not null comment '买家微信openId',
+    `order_amount`  decimal(8, 2) not null comment '买家订单总金额',
+    `order_status`  tinyint(3) default '0' comment '订单状态,订单状态默认0新下单',
     `pay_status`    tinyint(3) default '0' comment '支付状态,默认0未支付',
     `create_time`   timestamp  default current_timestamp comment '创建时间',
     `update_time`   timestamp  default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`order_id`),
-    key `idx_buyer_openid` (`buyer_openid`)
+    key `idx_buyer_openid` (`buyer_open_id`)
 ) comment '订单表';
 
 create table `order_detail`
@@ -47,7 +47,7 @@ create table `order_detail`
     `product_id`    varchar(32)   not null,
     `product_name`  varchar(32)   not null comment '商品名称',
     `product_price` decimal(8, 2) not null comment '商品价格',
-    `product_num`   int           not null comment '商品数量',
+    `product_quantity`   int           not null comment '商品数量',
     `product_icon`  varchar(512) comment '商品图片',
     `create_time`   timestamp default current_timestamp comment '创建时间',
     `update_time`   timestamp default current_timestamp on update current_timestamp comment '修改时间',

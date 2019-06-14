@@ -1,4 +1,4 @@
-package com.shu.sell.service.Impl;
+package com.shu.sell.service.impl;
 
 import com.shu.sell.dataobject.ProductCategory;
 import com.shu.sell.repository.ProductCategoryRepository;

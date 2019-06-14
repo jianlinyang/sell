@@ -3,10 +3,13 @@ package com.shu.sell.dataobject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <h1>商品</h1>
@@ -18,6 +21,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@DynamicInsert
+@DynamicUpdate
 public class ProductInfo {
     @Id
     private String productId;
@@ -53,4 +58,8 @@ public class ProductInfo {
      * 类目编号
      */
     private Integer categoryType;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

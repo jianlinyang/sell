@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import java.util.Date;
 @Entity
 @Data
 @DynamicUpdate
-@ToString
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCategory {

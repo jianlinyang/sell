@@ -29,18 +29,16 @@ public class ProductInfoRepositoryTest {
     @Test
     public void save() {
         List<ProductInfo> productInfos = new ArrayList<>();
-        for (int i = 10000; i < 11000; i++) {
-            ProductInfo productInfo = new ProductInfo();
-            productInfo.setProductName("皮蛋粥");
-            productInfo.setProductPrice(new BigDecimal(3.2));
-            productInfo.setProductStock(100);
-            productInfo.setProductDescription("很好喝的粥");
-            productInfo.setProductIcon("http://xx");
-            productInfo.setProductStatus(0);
-            productInfo.setCategoryType(3);
-            productInfo.setProductId(String.valueOf(i));
-            productInfos.add(productInfo);
-        }
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setProductName("红烧肉");
+        productInfo.setProductPrice(new BigDecimal(7.2));
+        productInfo.setProductStock(100);
+        productInfo.setProductDescription("很好吃的肉");
+        productInfo.setProductIcon("http://xx");
+        productInfo.setProductStatus(0);
+        productInfo.setCategoryType(4);
+        productInfo.setProductId(String.valueOf(10003));
+        productInfos.add(productInfo);
         repository.save(productInfos);
     }
 }

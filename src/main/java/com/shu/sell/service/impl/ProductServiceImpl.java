@@ -1,13 +1,16 @@
-package com.shu.sell.service.Impl;
+package com.shu.sell.service.impl;
 
 import com.shu.sell.dataobject.ProductInfo;
+import com.shu.sell.dto.CartDTO;
 import com.shu.sell.enums.ProductStatuEnum;
+import com.shu.sell.enums.ResultEnum;
+import com.shu.sell.exception.SellException;
 import com.shu.sell.repository.ProductInfoRepository;
 import com.shu.sell.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,5 +47,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
+    }
+
+    @Override
+    public void increaseStock(List<CartDTO> cartDtoList) {
+
+    }
+
+    @Override
+    @Transactional
+    public void decreaseStock(List<CartDTO> cartDtoList) {
+        for (CartDTO cartDTO : cartDtoList) {
+            ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
+            if (null == productInfo) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+            if (result < 0) {
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
     }
 }
