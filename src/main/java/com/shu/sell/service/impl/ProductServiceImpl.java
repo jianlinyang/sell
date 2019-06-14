@@ -20,7 +20,6 @@ import java.util.List;
  * @author yang
  * @date 2019/6/13 23:13
  */
-@SuppressWarnings("AlibabaTransactionMustHaveRollback")
 @Service
 public class ProductServiceImpl implements ProductService {
 
