@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <h1>购物车</h1>
+ * <h1>购物车数据传输对象</h1>
  *
  * @author yang
  * @date 2019/6/14 19:54

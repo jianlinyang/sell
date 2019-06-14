@@ -24,7 +24,8 @@ public class OrderServiceImplTest {
 
     @Autowired
     private OrderServiceImpl service;
-    private final String buyerOpenId = "2145325";
+    private final String BUYER_OPENID = "2145325";
+    private final String ORDER_ID = "7101951560517230052";
 
     @Test
     public void create() {
@@ -32,7 +33,7 @@ public class OrderServiceImplTest {
         orderDTO.setBuyerName("shui");
         orderDTO.setBuyerAddress("上海大学");
         orderDTO.setBuyerPhone("1234556894");
-        orderDTO.setBuyerOpenId(buyerOpenId);
+        orderDTO.setBuyerOpenId(BUYER_OPENID);
         //购物车
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         OrderDetail orderDetail = new OrderDetail();
@@ -50,6 +51,8 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+        OrderDTO one = service.findOne(ORDER_ID);
+        log.info("查找一个order:{}",one);
     }
 
     @Test
@@ -58,6 +61,8 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDTO one = service.findOne(ORDER_ID);
+        service.cancel(one);
     }
 
     @Test

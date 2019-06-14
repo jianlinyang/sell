@@ -20,6 +20,7 @@ import java.util.List;
  * @author yang
  * @date 2019/6/13 23:13
  */
+@SuppressWarnings("AlibabaTransactionMustHaveRollback")
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -50,9 +51,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void increaseStock(List<CartDTO> cartDtoList) {
-
+        for (CartDTO cartDTO : cartDtoList) {
+            ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
+            if (null == productInfo) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            int result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
     }
+
 
     @Override
     @Transactional
