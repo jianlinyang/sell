@@ -41,6 +41,10 @@ public enum ResultEnum {
      * 订单状态不正确
      */
     ORDER_DETAIL_EMPTY(16, "订单详情为空"),
+    /**
+     * 订单支付状态不正确
+     */
+    ORDER_PAY_STATUS_ERROR(17, "订单支付状态不正确"),
     ;
     private Integer code;
     private String message;

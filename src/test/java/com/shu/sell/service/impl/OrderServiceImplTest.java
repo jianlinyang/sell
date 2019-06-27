@@ -3,6 +3,7 @@ package com.shu.sell.service.impl;
 import com.shu.sell.dataobject.OrderDetail;
 import com.shu.sell.dto.OrderDTO;
 import com.shu.sell.enums.OrderStatusEnum;
+import com.shu.sell.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -48,13 +49,13 @@ public class OrderServiceImplTest {
         orderDetails.add(orderDetail2);
         orderDTO.setOrderDetailList(orderDetails);
         OrderDTO orderDTO1 = service.create(orderDTO);
-        log.info("创建订单成功:{}",orderDTO1);
+        log.info("创建订单成功:{}", orderDTO1);
     }
 
     @Test
     public void findOne() {
         OrderDTO one = service.findOne(ORDER_ID);
-        log.info("查找一个order:{}",one);
+        log.info("查找一个order:{}", one);
     }
 
     @Test
@@ -65,14 +66,20 @@ public class OrderServiceImplTest {
     public void cancel() {
         OrderDTO one = service.findOne(ORDER_ID);
         OrderDTO cancel = service.cancel(one);
-        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),cancel.getOrderStatus());
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), cancel.getOrderStatus());
     }
 
     @Test
     public void finish() {
+        OrderDTO one = service.findOne(ORDER_ID);
+        OrderDTO finish = service.finish(one);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(), finish.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO one = service.findOne(ORDER_ID);
+        OrderDTO finish = service.paid(one);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), finish.getPayStatus());
     }
 }
