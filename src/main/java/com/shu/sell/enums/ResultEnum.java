@@ -53,6 +53,10 @@ public enum ResultEnum {
      * 购物车为空
      */
     CART_EMPTY(18, "购物车为空"),
+    /**
+     * 该订单不属于当前用户
+     */
+    ORDER_OWNER_ERROR(19, "该订单不属于当前用户"),
     ;
     private Integer code;
     private String message;

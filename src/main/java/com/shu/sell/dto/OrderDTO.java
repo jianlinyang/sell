@@ -1,6 +1,9 @@
 package com.shu.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.shu.sell.dataobject.OrderDetail;
+import com.shu.sell.utils.serializer.Date2LongSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +21,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
     /**
      * 订单id
@@ -55,10 +59,12 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
     /**
      * 更新时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     /**

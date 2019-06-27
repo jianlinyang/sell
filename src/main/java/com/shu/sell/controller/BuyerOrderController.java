@@ -5,10 +5,12 @@ import com.shu.sell.dto.OrderDTO;
 import com.shu.sell.enums.ResultEnum;
 import com.shu.sell.exception.SellException;
 import com.shu.sell.form.OrderForm;
+import com.shu.sell.service.BuyerService;
 import com.shu.sell.service.OrderService;
 import com.shu.sell.utils.ResultVoUtils;
 import com.shu.sell.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
@@ -29,10 +31,13 @@ import java.util.HashMap;
 @RequestMapping("/buyer/order")
 @Slf4j
 public class BuyerOrderController {
+    private final BuyerService buyerService;
+
     private final OrderService orderService;
 
-    public BuyerOrderController(OrderService orderService) {
+    public BuyerOrderController(OrderService orderService, BuyerService buyerService) {
         this.orderService = orderService;
+        this.buyerService = buyerService;
     }
 
     /**
@@ -70,7 +75,7 @@ public class BuyerOrderController {
      * @return {@link ResultVO}
      */
     @GetMapping("/list")
-    public ResultVO list(@RequestParam("openId") String openId,
+    public ResultVO list(@RequestParam("openid") String openId,
                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                          @RequestParam(value = "size", defaultValue = "10") Integer size) {
         if (StringUtils.isEmpty(openId)) {
@@ -82,7 +87,31 @@ public class BuyerOrderController {
         return ResultVoUtils.success(list.getContent());
     }
 
-    //订单详情
+    /**
+     * 订单详情
+     *
+     * @param openId  openid
+     * @param orderId orderId
+     * @return {@link ResultVO}
+     */
+    @GetMapping("/detail")
+    public ResultVO detail(@RequestParam("openid") String openId,
+                           @RequestParam("orderId") String orderId) {
+        OrderDTO orderDTO = buyerService.findOrderOne(openId, orderId);
+        return ResultVoUtils.success(orderDTO);
+    }
 
-    //取消订单
+    /**
+     * 取消订单
+     *
+     * @param openId  openid
+     * @param orderId orderId
+     * @return {@link ResultVO}
+     */
+    @PostMapping("/cancel")
+    public ResultVO cancel(@RequestParam("openid") String openId,
+                           @RequestParam("orderId") String orderId) {
+        buyerService.cancelOrder(openId, orderId);
+        return ResultVoUtils.success();
+    }
 }
