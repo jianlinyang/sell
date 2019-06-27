@@ -108,14 +108,14 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderDTO cancel(OrderDTO orderDTO) {
         //判断订单状态
+        OrderMaster orderMaster = new OrderMaster();
         if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
             log.error("订单状态不正确:{}", orderDTO.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
         //修改订单状态
-        OrderMaster orderMaster = new OrderMaster();
+        orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        orderMaster.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         OrderMaster update = masterRepository.save(orderMaster);
         if (update == null) {
             log.error("取消订单更新失败:{}", orderMaster);

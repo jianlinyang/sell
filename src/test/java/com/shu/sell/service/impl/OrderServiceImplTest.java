@@ -2,7 +2,9 @@ package com.shu.sell.service.impl;
 
 import com.shu.sell.dataobject.OrderDetail;
 import com.shu.sell.dto.OrderDTO;
+import com.shu.sell.enums.OrderStatusEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,8 @@ public class OrderServiceImplTest {
     @Test
     public void cancel() {
         OrderDTO one = service.findOne(ORDER_ID);
-        service.cancel(one);
+        OrderDTO cancel = service.cancel(one);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),cancel.getOrderStatus());
     }
 
     @Test
